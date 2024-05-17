@@ -10,7 +10,6 @@ const getRate = async (_: Request, res: Response) => {
     return res.sendStatus(400).send({ error: { message: 'Invalid status value' } });
   }
 
-
   res.send({ rate });
 };
 

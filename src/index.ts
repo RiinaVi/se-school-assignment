@@ -25,7 +25,7 @@ const main = async () => {
 
   app.use('/', router);
 
-  app.use((err: Error, req: Request, res: Response) => {
+  app.use((err: Error, _req: Request, res: Response) => {
     if (err.stack) {
       console.error(err.stack);
       return res
@@ -34,7 +34,8 @@ const main = async () => {
     }
   });
 
-  schedule.scheduleJob('14 20 * * *', () => {
+  // send email every day at 10:00
+  schedule.scheduleJob('00 10 * * *', () => {
     console.log('Daily email sending scheduled.');
     sendRateToAllEmails();
   });

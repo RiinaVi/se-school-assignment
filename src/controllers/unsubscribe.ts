@@ -24,7 +24,6 @@ const unsubscribe = async (req: Request, res: Response) => {
           error: { message: "Email does not exists!"}
         });
       } else {
-
         await emailRepository.drop(emailId);
 
         res.send({ message: "Email was unsubscribed!" });
