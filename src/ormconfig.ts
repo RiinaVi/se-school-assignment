@@ -1,18 +1,16 @@
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
+import { DataSource } from 'typeorm';
+import Email from './entities/Email';
 
-const ormconfig: PostgresConnectionOptions = {
+export const ormconfig = new DataSource({
   type: 'postgres',
   host: process.env.POSTGRES_HOST,
   port: +process.env.POSTGRES_PORT,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  entities: ['dist/entities/*.js'],
+  entities: [Email],
   synchronize: false,
   migrations: ['src/migrations/*.ts'],
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
-};
-
-export default ormconfig;
+  migrationsTableName: 'migrations',
+  logging: false,
+});

@@ -1,14 +1,12 @@
-import { getConnection } from 'typeorm';
 import nodemailer from 'nodemailer';
 
-import EmailRepository from '../repositories/EmailRepository';
 import getRateData from '../utils/getRateData';
 import getMailTemplate from '../utils/getMailTemplate';
+import emailRepository from '../repositories/EmailRepository';
 
 const sendRateToAllEmails = async (): Promise<void> => {
   const currentRate = await getRateData(process.env.CURRENCY_BEACON_API_KEY);
-  const emailRepository = getConnection().getCustomRepository(EmailRepository);
-  const allEmails = await emailRepository.list();
+  const allEmails = await emailRepository.find();
 
   for (const emailEntry of allEmails) {
     const unsubscribeURL = `http://${process.env.SERVER_IP ?? 'localhost'}:${

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { createConnection } from 'typeorm';
+import { ormconfig as dataSource } from './ormconfig';
 
 import schedule from 'node-schedule';
 
@@ -16,7 +16,7 @@ dotenv.config();
 const { PORT } = process.env;
 
 const main = async () => {
-  await createConnection();
+  await dataSource.initialize();
 
   app.use(cors());
 

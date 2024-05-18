@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import { getConnection } from 'typeorm';
 
 import { createEmailSchema } from '../utils/validation';
-import EmailRepository from '../repositories/EmailRepository';
+import emailRepository from '../repositories/EmailRepository';
 
 const unsubscribe = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.query;
@@ -15,16 +14,16 @@ const unsubscribe = async (req: Request, res: Response): Promise<Response> => {
         error: { message: validationError.message.split('"').join('') },
       });
     }
-    const emailRepository =
-      getConnection().getCustomRepository(EmailRepository);
-    const foundEmail = await emailRepository.getByEmail(email as string);
+    const foundEmail = await emailRepository.findOneBy({ email } as {
+      email: string;
+    });
 
     if (!foundEmail) {
       res.status(409).send({
-        error: { message: 'Email does not exists!' },
+        error: { message: 'Email does not exist!' },
       });
     } else {
-      await emailRepository.drop(foundEmail.id);
+      await emailRepository.delete({ id: foundEmail.id });
 
       res.send({ message: 'Email was unsubscribed!' });
     }

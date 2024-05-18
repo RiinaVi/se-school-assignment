@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { getConnection } from 'typeorm';
 
 import { createEmailSchema } from '../utils/validation';
-import EmailRepository from '../repositories/EmailRepository';
 import Email from '../entities/Email';
+import emailRepository from '../repositories/EmailRepository';
 
 const subscribe = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.body as { email: string };
@@ -16,9 +15,7 @@ const subscribe = async (req: Request, res: Response): Promise<Response> => {
         error: { message: validationError.message.split('"').join('') },
       });
     }
-    const emailRepository =
-      getConnection().getCustomRepository(EmailRepository);
-    const foundEmail = await emailRepository.getByEmail(email);
+    const foundEmail = await emailRepository.findOneBy({ email });
 
     if (foundEmail) {
       res.status(409).send({
@@ -27,7 +24,7 @@ const subscribe = async (req: Request, res: Response): Promise<Response> => {
     } else {
       const emailEntry = Email.create({ email });
 
-      await emailRepository.put(emailEntry);
+      await emailRepository.save(emailEntry);
 
       res.send(emailEntry);
     }
