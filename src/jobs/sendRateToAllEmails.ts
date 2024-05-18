@@ -7,7 +7,7 @@ import getMailTemplate from '../utils/getMailTemplate';
 import * as process from 'node:process';
 
 const sendRateToAllEmails = async () => {
-  const currentRate = await getRateData();
+  const currentRate = await getRateData(process.env.CURRENCY_BEACON_API_KEY);
   const emailRepository = getConnection().getCustomRepository(EmailRepository);
   const allEmails = await emailRepository.list();
 

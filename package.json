@@ -13,7 +13,8 @@
     "dev": "dotenv -- nodemon --watch src -e ts,ejs --exec npm run dev:start",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "typeorm:run": "npm run typeorm migration:run",
-    "typeorm:revert": "npm run typeorm migration:revert"
+    "typeorm:revert": "npm run typeorm migration:revert",
+    "test": "jest --setupFiles dotenv/config"
   },
   "keywords": [],
   "author": "Arina Kysilova",
@@ -24,16 +25,19 @@
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "jest": "^29.7.0",
     "joi": "^17.4.1",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.13",
     "pg": "^8.7.1",
+    "ts-jest": "^29.1.2",
     "typeorm": "^0.2.37",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.5.12",
     "@types/node": "^16.4.1",
     "@types/node-schedule": "^2.1.7",
     "@types/nodemailer": "^6.4.15",
