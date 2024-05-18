@@ -13,7 +13,7 @@
 docker-compose up
 ```
 
-# Project Text Stack
+# Project Tech Stack
 
 - Express.js
 - TypeScript
