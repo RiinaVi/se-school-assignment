@@ -119,7 +119,7 @@ Returns success message on 200
 <img width="1189" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/23aee0a4-a19e-41af-8181-fb34939ff571">
 
    
-### 5. POST /unsubscribe using the link in the email
+### 5. Perform /unsubscribe request using the link in the email
 
 
 <img width="545" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/5475b43a-70f8-48bf-b89d-eaa2f156aa62">
