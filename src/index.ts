@@ -13,7 +13,7 @@ const app = express();
 
 dotenv.config();
 
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 const main = async () => {
   await createConnection();
@@ -35,9 +35,9 @@ const main = async () => {
   });
 
   // send email every day at 10:00
-  schedule.scheduleJob('00 10 * * *', () => {
+  schedule.scheduleJob('00 10 * * *', async () => {
     console.log('Daily email sending scheduled.');
-    sendRateToAllEmails();
+    await sendRateToAllEmails();
   });
 
   app.listen(PORT, () => {

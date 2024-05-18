@@ -5,7 +5,7 @@ import EmailRepository from '../repositories/EmailRepository';
 import getRateData from '../utils/getRateData';
 import getMailTemplate from '../utils/getMailTemplate';
 
-const sendRateToAllEmails = async () => {
+const sendRateToAllEmails = async (): Promise<void> => {
   const currentRate = await getRateData(process.env.CURRENCY_BEACON_API_KEY);
   const emailRepository = getConnection().getCustomRepository(EmailRepository);
   const allEmails = await emailRepository.list();

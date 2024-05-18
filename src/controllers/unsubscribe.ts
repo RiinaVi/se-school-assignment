@@ -4,7 +4,7 @@ import { getConnection } from 'typeorm';
 import { createEmailSchema } from '../utils/validation';
 import EmailRepository from '../repositories/EmailRepository';
 
-const unsubscribe = async (req: Request, res: Response) => {
+const unsubscribe = async (req: Request, res: Response): Promise<Response> => {
   const { email } = req.query;
 
   try {
@@ -14,23 +14,22 @@ const unsubscribe = async (req: Request, res: Response) => {
       return res.status(400).send({
         error: { message: validationError.message.split('"').join('') },
       });
+    }
+    const emailRepository =
+      getConnection().getCustomRepository(EmailRepository);
+    const foundEmail = await emailRepository.getByEmail(email as string);
+
+    if (!foundEmail) {
+      res.status(409).send({
+        error: { message: 'Email does not exists!' },
+      });
     } else {
-      const emailRepository =
-        getConnection().getCustomRepository(EmailRepository);
-      const foundEmail = await emailRepository.getByEmail(email as string);
+      await emailRepository.drop(foundEmail.id);
 
-      if (!foundEmail) {
-        res.status(409).send({
-          error: { message: 'Email does not exists!' },
-        });
-      } else {
-        await emailRepository.drop(foundEmail.id);
-
-        res.send({ message: 'Email was unsubscribed!' });
-      }
+      res.send({ message: 'Email was unsubscribed!' });
     }
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
 
     return res.status(400).send({ error: { message: 'invalid payload' } });
   }

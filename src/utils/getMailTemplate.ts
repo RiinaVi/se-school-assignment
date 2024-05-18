@@ -1,4 +1,4 @@
-const getMailTemplate = (rateValue: number, unsubscribeUrl: string) => `
+const getMailTemplate = (rateValue: number, unsubscribeUrl: string): string => `
   <div style="font-size: 20px; text-align: center">
     <p>Hello, if you see this email, then you have previously subscribed to our updates.</p>
     <hr>

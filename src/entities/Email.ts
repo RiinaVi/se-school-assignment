@@ -9,7 +9,7 @@ class Email {
   @Column({ type: 'text' })
   email!: string;
 
-  static create(data: Omit<Email, 'id'>) {
+  static create(data: Omit<Email, 'id'>): Email {
     const emailEntry = new Email();
 
     emailEntry.id = v4();
