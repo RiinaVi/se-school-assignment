@@ -23,6 +23,7 @@ docker-compose up
 - Joi
 - Nodemailer
 - Node-schedule
+- Jest
 
 # API Documentation
 
