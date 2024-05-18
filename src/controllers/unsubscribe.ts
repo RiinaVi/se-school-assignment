@@ -16,15 +16,14 @@ const unsubscribe = async (req: Request, res: Response) => {
       });
     } else {
       const emailRepository = getConnection().getCustomRepository(EmailRepository);
-      const allEmails = await emailRepository.list();
-      const emailId = allEmails.find((entry) => entry.email === email)?.id;
+      const foundEmail = await emailRepository.getByEmail(email as string);
 
-      if (!emailId) {
+      if (!foundEmail) {
         res.status(409).send({
           error: { message: "Email does not exists!"}
         });
       } else {
-        await emailRepository.drop(emailId);
+        await emailRepository.drop(foundEmail.id);
 
         res.send({ message: "Email was unsubscribed!" });
       }

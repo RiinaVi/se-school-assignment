@@ -15,6 +15,10 @@ class EmailRepository extends Repository<Email> {
   drop(id: Email['id']) {
     return this.delete({ id });
   }
+
+  getByEmail(email: Email['email']) {
+    return this.findOne({ email });
+  }
 }
 
 export default EmailRepository;

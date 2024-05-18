@@ -17,9 +17,9 @@ const subscribe = async (req: Request, res: Response) => {
       });
     } else {
       const emailRepository = getConnection().getCustomRepository(EmailRepository);
-      const allEmails = await emailRepository.list();
+      const foundEmail = await emailRepository.getByEmail(email as string);
 
-      if (allEmails.find((entry) => entry.email === email)) {
+      if (foundEmail) {
         res.status(409).send({
           error: { message: "Email already exists!"}
         });
