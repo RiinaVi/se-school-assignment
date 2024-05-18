@@ -115,12 +115,12 @@ Returns success message on 200
 <img width="818" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/0f7dd652-c924-4b88-b518-d89643f55069">
 
 
-### 4. Receive the email once a day (you may adjust cron job timing for the testing purposes). Important note: when the app is running locally (not in Docker container) - the time zone for email sending is the one that you computer uses. And when the app runs in the container - it's UTC.
+### 6. Receive the email once a day (you may adjust cron job timing for the testing purposes). Important note: when the app is running locally (not in Docker container) - the time zone for email sending is the one that you computer uses. And when the app runs in the container - it's UTC.
 
 <img width="1189" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/23aee0a4-a19e-41af-8181-fb34939ff571">
 
    
-### 5. Perform /unsubscribe request using the link in the email
+### 7. Perform /unsubscribe request using the link in the email
 
 
 <img width="545" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/5475b43a-70f8-48bf-b89d-eaa2f156aa62">
@@ -128,7 +128,7 @@ Returns success message on 200
 <img width="548" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/6d6636b8-8586-4d15-beb4-90ce227ede38">
 
 
-### 6. Submitting already unsubscribed email would result in 409 error
+### 8. Submitting already unsubscribed email would result in 409 error
 
 <img width="734" alt="image" src="https://github.com/RiinaVi/se-school-assignment/assets/44338265/b84d5823-29cd-4de8-ac31-2f547a72807e">
 
