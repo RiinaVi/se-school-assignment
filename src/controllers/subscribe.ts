@@ -16,12 +16,13 @@ const subscribe = async (req: Request, res: Response) => {
         error: { message: validationError.message.split('"').join('') },
       });
     } else {
-      const emailRepository = getConnection().getCustomRepository(EmailRepository);
+      const emailRepository =
+        getConnection().getCustomRepository(EmailRepository);
       const foundEmail = await emailRepository.getByEmail(email as string);
 
       if (foundEmail) {
         res.status(409).send({
-          error: { message: "Email already exists!"}
+          error: { message: 'Email already exists!' },
         });
       } else {
         const emailEntry = Email.create({ email });
@@ -31,7 +32,6 @@ const subscribe = async (req: Request, res: Response) => {
         res.send(emailEntry);
       }
     }
-
   } catch (error) {
     console.error(error.message);
 

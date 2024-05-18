@@ -15,20 +15,20 @@ const unsubscribe = async (req: Request, res: Response) => {
         error: { message: validationError.message.split('"').join('') },
       });
     } else {
-      const emailRepository = getConnection().getCustomRepository(EmailRepository);
+      const emailRepository =
+        getConnection().getCustomRepository(EmailRepository);
       const foundEmail = await emailRepository.getByEmail(email as string);
 
       if (!foundEmail) {
         res.status(409).send({
-          error: { message: "Email does not exists!"}
+          error: { message: 'Email does not exists!' },
         });
       } else {
         await emailRepository.drop(foundEmail.id);
 
-        res.send({ message: "Email was unsubscribed!" });
+        res.send({ message: 'Email was unsubscribed!' });
       }
     }
-
   } catch (error) {
     console.error(error.message);
 

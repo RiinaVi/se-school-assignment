@@ -41,7 +41,11 @@ const main = async () => {
   });
 
   app.listen(PORT, () => {
-    console.log(`server started at http://${process.env.SERVER_IP ?? 'localhost'}:${PORT}`);
+    console.log(
+      `server started at http://${
+        process.env.SERVER_IP ?? 'localhost'
+      }:${PORT}`,
+    );
   });
 };
 
